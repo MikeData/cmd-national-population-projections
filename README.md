@@ -12,5 +12,5 @@ example source: https://www.ons.gov.uk/peoplepopulationandcommunity/populationan
 
 Creates a master file called 'Experimental-National Population Projections' which is a V4 shaped extraction of all the xml data.
 
-Use the jupyter notebook `Pop Projections Transform.ipynb.ipynb` to splt this file into the required datasets.
+Use the jupyter notebook `Pop Projections Transform.ipynb.ipynb` to splt this into the required datasets.
 
