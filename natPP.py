@@ -118,7 +118,7 @@ def tabDetailsFromXML(XMLsoup):
 
 # Build a v4 file from our list of dataframes
 def buildV4(dfList):
-    
+
     v4ToJoin = []
     for dfItem in dfList:
         v4Pieces = []
@@ -133,17 +133,17 @@ def buildV4(dfList):
                 
                 newDf = pd.DataFrame()
                 newDf['V4_0'] = df[col]
-                
-                newDf['time'] = col
-                newDf['time_codelist'] = 'Year'
 
-                newDf['geography'] = ''
+                newDf['time_codelist'] = 'Year'
+                newDf['time'] = col
+
                 newDf['geography_codelist'] = coverage
+                newDf['geography'] = ''
                 
                 newDf['sex_codelist'] = ''
                 newDf['sex'] = df['Sex']
-                newDf[newDf['sex'] == 1] = 'Male'
-                newDf[newDf['sex'] == 2] = 'Female'
+                newDf['sex'][newDf['sex'].astype(str) == "1"] = 'Male'
+                newDf['sex'][newDf['sex'].astype(str) == "2"] = 'Female'
                 
                 newDf['age_codelist'] = ''
                 newDf['age'] = df['Age']
@@ -172,7 +172,7 @@ def codeListify(df, colA, colB):
     def changeValueToCode(cell):
 
         cell = str(cell)
-        cell = cell.lower().replace(" ","-")
+        cell = cell.lower().replace(" ","-").replace("_","-").replace("(", "-").replace(")","")
         return cell
 
     df[colA] = df[colB].apply(changeValueToCode)
@@ -219,7 +219,7 @@ def oneFileToV4(inFile):
     return v4
 
 
-def extractFromZip(filename, oneCube=False):
+def extractFromZip(filename):
     
     z = zipfile.ZipFile(filename)
     z.extractall()
@@ -239,7 +239,7 @@ def extractFromZip(filename, oneCube=False):
         
     final = pd.concat(allV4)
 
-    final.to_csv('Experimental-National Population Projections.csv', index=False)
+    final.to_csv('NPP_Extracted_{f}.csv'.format(f=sys.argv[1][:-4]), index=False)
 
 
 if __name__ == "__main__":
