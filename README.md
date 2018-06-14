@@ -10,7 +10,7 @@ example source: https://www.ons.gov.uk/peoplepopulationandcommunity/populationan
 
 `python natPP.py <name of <zipfile>`
 
-Creates a master file called 'Experimental-National Population Projections' which is a V4 shaped extraction of all the xml data.
+Creates a master file called 'Npp_Extracted_<name of zipfile>.csv' which is a V4 shaped extraction of all the xml data.
 
-Use the jupyter notebook `Pop Projections Transform.ipynb.ipynb` to splt this into the required datasets.
+Use the jupyter notebook `Pop Projections Transform.ipynb` to splt this into the required datasets.
 
