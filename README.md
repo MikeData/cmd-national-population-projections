@@ -15,4 +15,6 @@ Creates a master file called `Npp_Extracted_<name of zipfile>.csv` which is a V4
 Use the jupyter notebook `Pop Projections Transform.ipynb` to splt this into the required datasets.
 
 
-## NOTE - you need to manually set the year for cross border rates within the notebook. It's within the last 'cell' of code. Mopdify the line `crossBorderRates["time"] = "2016"` 
+## Important!
+
+You currently need to manually set the year for cross border rates within the notebook. It's within the last 'cell' of code. Just modify the line `crossBorderRates["time"] = "2016"` accordingly.
