@@ -117,7 +117,7 @@ def tabDetailsFromXML(XMLsoup):
     
 
 # Build a v4 file from our list of dataframes
-def buildV4(dfList):
+def buildV4(dfList, projectionTypeIDentifier):
 
     v4ToJoin = []
     for dfItem in dfList:
@@ -148,7 +148,7 @@ def buildV4(dfList):
                 newDf['age_codelist'] = ''
                 newDf['age'] = df['Age']
                 
-                newDf['projectiontype_codelist'] = ''
+                newDf['projectiontype_codelist'] = projectionTypeIDentifier
                 newDf['projectiontype'] = projection
                     
                 newDf['populationmeasure_codelist'] = ''
@@ -191,7 +191,6 @@ def postProcess(df):
 
     df = codeListify(df, "sex_codelist", "sex")
     df = codeListify(df, "age_codelist", "age")
-    df = codeListify(df, "projectiontype_codelist", "projectiontype")
     df = codeListify(df, "populationmeasure_codelist", "populationmeasure")
 
     # Geography
@@ -200,7 +199,7 @@ def postProcess(df):
     return df
 
 
-def oneFileToV4(inFile): 
+def oneFileToV4(inFile, projectionTypeIDentifier):
 
     with open(inFile, 'r') as f:
 
@@ -214,7 +213,7 @@ def oneFileToV4(inFile):
         dfList = dataFramesFromXML(soup, tabDict)
         
         # Build V4
-        v4 = buildV4(dfList)
+        v4 = buildV4(dfList, projectionTypeIDentifier)
     
     return v4
 
@@ -234,7 +233,7 @@ def extractFromZip(filename):
         else:
             print("\nProcessing: " + xml)
 
-            v4 = oneFileToV4(xml)
+            v4 = oneFileToV4(xml, projectionTypeIDentifier)
             allV4.append(v4)
         
     final = pd.concat(allV4)
